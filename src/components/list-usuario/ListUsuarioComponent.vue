@@ -1,0 +1,13 @@
+<template>
+  <div class="row justify-content-center">
+    <h1>Listar todos os Usuários</h1>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {};
+  },
+};
+</script>
