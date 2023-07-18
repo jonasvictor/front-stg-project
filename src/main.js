@@ -1,12 +1,22 @@
+/**
+ * Arquivo de inicialização da aplicação
+ *
+ * Este arquivo configura e inicializa a aplicação Vue.
+ * Ele importa os módulos necessários, como o App.vue, o router, o store e as dependências de estilização.
+ * Verifica se o usuário está autenticado e redireciona para a tela de login se necessário.
+ * Por fim, cria e monta a aplicação Vue.
+ */
+
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import VueSweetalert2 from "vue-sweetalert2";
+import axios from "axios";
+import "../node_modules/nprogress/nprogress.css";
 
-// Antes de montar o aplicativo, verifique se o usuário está autenticado
-// e redirecione-o para a tela de login se necessário
+// Verifica se o usuário está autenticado e redireciona para a tela de login se necessário
 router.isReady().then(() => {
   const isAuthenticated = localStorage.getItem("token") !== null;
 
@@ -15,7 +25,8 @@ router.isReady().then(() => {
   }
 });
 
-createApp(App).use(store).use(router).mount("#app");
+// Cria e monta a aplicação Vue
+createApp(App).use(store).use(router, VueSweetalert2, axios).mount("#app");
 
 // import Vue from "vue";
 // import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
