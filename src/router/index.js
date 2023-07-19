@@ -27,14 +27,20 @@ const routes = [
       import("../components/create-usuario/CreateUsuarioComponent"),
   },
   {
-    path: "/usuarios/listar",
-    name: "Listar Usuários",
-    component: () => import("../components/list-usuario/ListUsuarioComponent"),
-  },
-  {
     path: "/usuarios/:id",
     name: "Editar Usuário",
     component: () => import("../components/edit-usuario/EditUsuarioComponent"),
+  },
+  {
+    path: "/usuarios/:id",
+    name: "Excluir Usuário",
+    component: () =>
+      import("../components/excluir-usuario/ExcluirUsuarioComponent"),
+  },
+  {
+    path: "/usuarios/listar",
+    name: "Listar Usuários",
+    component: () => import("../components/list-usuario/ListUsuarioComponent"),
   },
 ];
 
