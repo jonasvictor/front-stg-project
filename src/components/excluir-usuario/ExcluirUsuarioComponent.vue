@@ -1,12 +1,12 @@
 <template>
   <div class="row justify-content-center">
-    <h1>Listar todos os Usuários</h1>
+    <h1>Excluir Usuário</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ListUsuarioComponent",
+  name: "ExcluirUsuarioComponent",
 
   data() {
     return {};
