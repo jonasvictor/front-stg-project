@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "App",
   data() {
@@ -64,12 +66,22 @@ export default {
 
     // Função de logout do usuário
     logout() {
-      // Remove o token e outros dados do usuário do armazenamento (por exemplo, LocalStorage)
+      // Remove o token e outros dados do usuário do armazenamento no LocalStorage
       localStorage.removeItem("token");
       localStorage.removeItem("usuario");
 
-      // Redireciona para a página de login
-      this.$router.push("/login");
+      // Faz uma requisição POST para a rota de logout no backend
+      axios
+        .post("http://localhost:3030/logout")
+        .then(() => {
+          // Redireciona para a página de login após o logout
+          this.$router.push("/login");
+        })
+        .catch((error) => {
+          console.log(error);
+          // Exibe uma mensagem de erro caso ocorra um problema no logout
+          alert("Ocorreu um erro durante o Logout.");
+        });
     },
   },
 
