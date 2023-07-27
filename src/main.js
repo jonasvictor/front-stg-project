@@ -15,6 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import VueSweetalert2 from "vue-sweetalert2";
 import axios from "axios";
 import "../node_modules/nprogress/nprogress.css";
+import FontAwesomeIcon from "@/assets/icons";
 
 // Verifica se o usuário está autenticado e redireciona para a tela de login se necessário
 router.isReady().then(() => {
@@ -26,7 +27,11 @@ router.isReady().then(() => {
 });
 
 // Cria e monta a aplicação Vue
-createApp(App).use(store).use(router, VueSweetalert2, axios).mount("#app");
+createApp(App)
+  .component("font-awesome-icon", FontAwesomeIcon)
+  .use(store)
+  .use(router, VueSweetalert2, axios)
+  .mount("#app");
 
 // import Vue from "vue";
 // import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
