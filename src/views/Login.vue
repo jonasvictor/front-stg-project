@@ -3,9 +3,9 @@
     <div class="login-container">
       <h1 class="h3 mb-3 fw-normal text-center">Login</h1>
 
-      <form @submit.stop.prevent="submit">
+      <form @submit.stop.prevent="submit()">
         <div class="text-start">
-          <label for="email" class="form-label">Email</label>
+          <label class="form-label">Email</label>
           <input
             v-model="input.email"
             type="email"
@@ -15,7 +15,7 @@
           />
         </div>
         <div class="text-start mt-3">
-          <label for="senha" class="form-label">Senha</label>
+          <label class="form-label">Senha</label>
           <input
             v-model="input.senha"
             type="password"
