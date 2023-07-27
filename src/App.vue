@@ -19,13 +19,13 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/usuarios/listar">
+            <router-link class="nav-link" to="/listar-usuarios">
               Listar Usuários
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/usuarios/:id">
-              Editar Usuário
+            <router-link class="nav-link" to="/transacoes">
+              Transaçôes
             </router-link>
           </li>
         </ul>
