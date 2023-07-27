@@ -22,26 +22,57 @@ const routes = [
   },
   {
     path: "/usuarios",
-    name: "Criar Novo Usuário",
+    name: "criar-usuario",
     component: () =>
-      import("../components/create-usuario/CreateUsuarioComponent"),
+      import("@/components/create-usuario/CreateUsuarioComponent"),
   },
   {
-    path: "/usuarios/:id",
-    name: "Editar Usuário",
-    component: () => import("../components/edit-usuario/EditUsuarioComponent"),
+    path: "/editar-usuario/:id",
+    name: "editar-usuario",
+    component: () => import("@/components/edit-usuario/EditUsuarioComponent"),
   },
   {
-    path: "/usuarios/:id",
-    name: "Excluir Usuário",
+    path: "/listar-usuarios",
+    name: "listar-usuarios",
+    component: () => import("@/components/list-usuario/ListUsuarioComponent"),
+  },
+  {
+    path: "/transacoes",
+    name: "transacoes",
     component: () =>
-      import("../components/excluir-usuario/ExcluirUsuarioComponent"),
+      import("@/components/transacoes/TransacoesUsuarioComponent"),
+    meta: { requiresAuth: true },
   },
   {
-    path: "/usuarios/listar",
-    name: "Listar Usuários",
-    component: () => import("../components/list-usuario/ListUsuarioComponent"),
+    path: "/saque",
+    name: "saque",
+    component: () => import("@/components/transacoes/SaqueComponent"),
+    meta: { requiresAuth: true },
   },
+  {
+    path: "/deposito",
+    name: "deposito",
+    component: () => import("@/components/transacoes/DepositoComponent"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/extrato",
+    name: "extrato",
+    component: () => import("@/components/transacoes/ExtratoComponent"),
+    meta: { requiresAuth: true },
+  },
+  // {
+  //   path: "/extrato/deposito",
+  //   name: "extrato-deposito",
+  //   component: () => import("@/components/transacoes/ExtratoComponent"),
+  //   meta: { requiresAuth: true },
+  // },
+  // {
+  //   path: "/extrato/saque",
+  //   name: "extrato-saque",
+  //   component: () => import("@/components/transacoes/ExtratoComponent"),
+  //   meta: { requiresAuth: true },
+  // },
 ];
 
 const router = createRouter({
