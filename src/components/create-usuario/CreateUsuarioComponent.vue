@@ -48,7 +48,10 @@
 
           <!-- INÍCIO DO BLOCO: BOTÃO DE SUBMISSÃO -->
           <div class="form-group mt-3">
-            <button type="submit" class="btn btn-primary">Criar</button>
+            <button @click="submitNovoUsuario" class="btn btn-primary">
+              <font-awesome-icon :icon="['fas', 'user-plus']" />
+              Criar Usuário
+            </button>
           </div>
           <!-- FIM DO BLOCO: BOTÃO DE SUBMISSÃO -->
         </form>
@@ -58,22 +61,40 @@
 </template>
 
 <script>
+import UsuarioService from "@/services/UsuarioService";
+
 export default {
   name: "CreateUsuarioComponent",
 
   data() {
     return {
       usuario: {
-        name: "",
-        email: "",
-        senha: "",
+        name: null,
+        email: null,
+        senha: null,
       },
     };
   },
 
   methods: {
     handleSubmitForm() {
-      // TODO: Implementar a lógica de criação de usuário
+      // TODO: Implementar a lógica de criação de usuário na validação dos campos com vue-validate
+      if (!this.usuario.name || !this.usuario.email || !this.usuario.senha) {
+        alert("Todos os campos devem ser preenchidos.");
+        return false;
+      }
+      return true;
+    },
+
+    async submitNovoUsuario() {
+      if (!this.handleSubmitForm()) {
+        return; // Se a validação falhou, não continua com a criação do usuário
+      }
+      await UsuarioService.createUsuario(this.usuario);
+
+      this.$router.push({
+        name: "listar-usuarios",
+      });
     },
   },
 };
