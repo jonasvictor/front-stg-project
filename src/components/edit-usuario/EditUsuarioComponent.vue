@@ -47,6 +47,8 @@
 
 <script>
 import UsuarioService from "../../services/UsuarioService";
+import Alert from "../../utils/Alert";
+
 export default {
   name: "EditUsuarioComponent",
 
@@ -80,6 +82,7 @@ export default {
         this.$route.params.id,
         this.usuarioForm
       );
+      Alert.showToast("success", "Usuário atualizado com sucesso!");
       this.$router.push({ name: "listar-usuarios" });
     },
   },

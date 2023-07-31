@@ -62,6 +62,7 @@
 
 <script>
 import UsuarioService from "@/services/UsuarioService";
+import Alert from "../../utils/Alert";
 
 export default {
   name: "CreateUsuarioComponent",
@@ -80,7 +81,7 @@ export default {
     handleSubmitForm() {
       // TODO: Implementar a lógica de criação de usuário na validação dos campos com vue-validate
       if (!this.usuario.name || !this.usuario.email || !this.usuario.senha) {
-        alert("Todos os campos devem ser preenchidos.");
+        Alert.showToast("warning", "Preencha todos os campos!");
         return false;
       }
       return true;

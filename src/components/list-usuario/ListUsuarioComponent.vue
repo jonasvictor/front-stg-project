@@ -35,7 +35,9 @@
 </template>
 
 <script>
+import TransacaoService from "../../services/TransacaoService";
 import UsuarioService from "../../services/UsuarioService";
+import Alert from "../../utils/Alert";
 
 export default {
   name: "ListUsuarioComponent",
@@ -58,18 +60,42 @@ export default {
     },
 
     async removeUsuario(id) {
+      const saldo = await TransacaoService.getSaldoUsuario(id);
+      if (saldo > 0) {
+        Alert.showToast(
+          "error",
+          "O usuário possui saldo em conta e não pode ser excluído."
+        );
+        return;
+      }
       await UsuarioService.deleteUsuario(id);
+      Alert.showToast("success", "Usuário excluído com sucesso!");
       this.listTodosUsuarios();
     },
-    // deleteUsuario(id) {
-    //   UsuarioService.deleteUsuario(id)
-    //     .then((response) => {
-    //       this.listTodosUsuarios();
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
   },
 };
+// // UsuarioService.js
+
+// // ...
+
+// const deleteUsuario = async (id) => {
+//   // ...
+
+//   if (transacoesPendentes.length > 0) {
+//     return { error: "O usuário possui transações pendentes e não pode ser excluído." };
+//   }
+
+//   if (saldoAtual > 0) {
+//     return { error: "O usuário possui saldo em conta e não pode ser excluído." };
+//   }
+
+//   // ...
+
+//   return {
+//     id: usuarioExistente.id,
+//     name: usuarioExistente.name,
+//     email: usuarioExistente.email,
+//     senha: usuarioExistente.senha,
+//   };
+// };
 </script>
