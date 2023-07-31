@@ -22,10 +22,6 @@
   </div>
 </template>
 
-<script>
-// Seu script aqui, caso haja
-</script>
+<script></script>
 
-<style>
-/* Seus estilos personalizados aqui, caso haja */
-</style>
+<style></style>

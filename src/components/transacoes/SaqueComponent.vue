@@ -55,28 +55,33 @@ export default {
   },
   methods: {
     async submitSaque() {
-      const saldoAtual = await TransacaoService.getSaldoUsuario(
-        this.valorSaque
-      );
       const usuarioExiste = await UsuarioService.getUsuarioId(this.usuario_id);
       if (!usuarioExiste) {
         Alert.showToast(
           "error",
           "Erro ao realizar o saque, Usuário não foi encontrado."
         );
-      } else if (this.valorSaque > saldoAtual || this.valorSaque <= 0) {
+        return;
+      }
+
+      const saldoAtual = await TransacaoService.getSaldoUsuario(
+        this.usuario_id
+      );
+      if (this.valorSaque > saldoAtual || this.valorSaque <= 0) {
+        console.log("Valor do saque não pode ser maior que o saldo atual.");
         Alert.showToast(
           "error",
           "O valor do saque deve ser maior que zero. E não pode ser maior que o saldo atual."
         );
-      } else {
-        await TransacaoService.createSaque({
-          usuario_id: this.usuario_id,
-          valor: this.valorSaque,
-        });
-        Alert.showToast("success", "Saque realizado com sucesso!");
-        this.$router.push("/transacoes");
+        return;
       }
+
+      await TransacaoService.createSaque({
+        usuario_id: this.usuario_id,
+        valor: this.valorSaque,
+      });
+      Alert.showToast("success", "Saque realizado com sucesso!");
+      this.$router.push("/transacoes");
     },
   },
 };

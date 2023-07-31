@@ -4,10 +4,11 @@
       <div class="card-header">
         <h3>Editar dados do Usuário</h3>
       </div>
-      <div>
+
+      <div class="card-body">
         <form v-on:submit.prevent="editFormUsuario()">
           <!-- INÍCIO DO BLOCO: NOME -->
-          <div class="form-group mt-3">
+          <div class="form-group">
             <label class="font-weight-bold">Nome do Usuário</label>
             <input
               type="text"
@@ -39,6 +40,7 @@
               Editar
             </button>
           </div>
+          <!-- FIM DO BLOCO: BOTÃO DE SUBMISSÃO -->
         </form>
       </div>
     </div>

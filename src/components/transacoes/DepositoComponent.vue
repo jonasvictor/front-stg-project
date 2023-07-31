@@ -57,20 +57,13 @@ export default {
   },
   methods: {
     async submitDeposito() {
-      // let existe = Boolean;
       const usuarioExiste = await UsuarioService.getUsuarioId(this.usuario_id);
       if (!usuarioExiste) {
         Alert.showToast(
           "error",
           "Erro ao realizar o depósito, Usuário não foi encontrado."
         );
-      } else {
-        await TransacaoService.createDeposito({
-          valor: this.valorDeposito,
-          usuario_id: this.usuario_id,
-        });
-        Alert.showToast("success", "Depósito realizado com sucesso!");
-        this.$router.push("/transacoes");
+        return;
       }
 
       if (this.valorDeposito <= 0) {
@@ -80,26 +73,16 @@ export default {
         );
         return;
       }
-      // if (!usuarioExiste) {
-      //   Alert.showToast(
-      //     "error",
-      //     "O ID fornecido não corresponde a nenhum usuário registrado."
-      //   );
-      //   return;
-      // }
 
-      // if (this.valorDeposito <= 0) {
-      //   Alert.showToast(
-      //     "error",
-      //     "O valor do depósito deve ser maior que zero."
-      //   );
-      //   return;
-      // }
+      await TransacaoService.createDeposito({
+        valor: this.valorDeposito,
+        usuario_id: this.usuario_id,
+      });
+      Alert.showToast("success", "Depósito realizado com sucesso!");
+      this.$router.push("/transacoes");
     },
   },
 };
 </script>
 
-<style>
-/* ... Estilos específicos para o componente, se necessário ... */
-</style>
+<style></style>

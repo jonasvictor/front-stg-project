@@ -74,28 +74,4 @@ export default {
     },
   },
 };
-// // UsuarioService.js
-
-// // ...
-
-// const deleteUsuario = async (id) => {
-//   // ...
-
-//   if (transacoesPendentes.length > 0) {
-//     return { error: "O usuário possui transações pendentes e não pode ser excluído." };
-//   }
-
-//   if (saldoAtual > 0) {
-//     return { error: "O usuário possui saldo em conta e não pode ser excluído." };
-//   }
-
-//   // ...
-
-//   return {
-//     id: usuarioExistente.id,
-//     name: usuarioExistente.name,
-//     email: usuarioExistente.email,
-//     senha: usuarioExistente.senha,
-//   };
-// };
 </script>

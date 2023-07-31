@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import { isAuthenticated } from "../utils/auth";
 import nProgress from "nprogress";
@@ -17,7 +17,7 @@ const routes = [
   {
     path: "/home",
     name: "home",
-    component: HomeView,
+    component: Home,
     meta: { requiresAuth: true }, // Requer autenticação para acessar a rota
   },
   {

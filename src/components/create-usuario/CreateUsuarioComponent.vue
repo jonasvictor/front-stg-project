@@ -79,7 +79,6 @@ export default {
 
   methods: {
     handleSubmitForm() {
-      // TODO: Implementar a lógica de criação de usuário na validação dos campos com vue-validate
       if (!this.usuario.name || !this.usuario.email || !this.usuario.senha) {
         Alert.showToast("warning", "Preencha todos os campos!");
         return false;
@@ -89,7 +88,7 @@ export default {
 
     async submitNovoUsuario() {
       if (!this.handleSubmitForm()) {
-        return; // Se a validação falhou, não continua com a criação do usuário
+        return;
       }
       await UsuarioService.createUsuario(this.usuario);
 

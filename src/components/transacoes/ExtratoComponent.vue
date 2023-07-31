@@ -86,21 +86,15 @@ export default {
     };
   },
 
-  // mounted() {
-  //   this.gerarExtrato();
-  // },
-
   methods: {
-    // Formatar data
     formatarData(data) {
       return new Date(data).toLocaleString();
     },
 
-    // Função para obter o tipo de transação com base no tipo_id
     getTipoTransacao(tipo_id) {
       return tipo_id === 3 ? "Depósito" : "Saque";
     },
-    // Buscar Status da Transação
+
     getStatusTransacao(status_id) {
       return status_id === 1 ? "Pendente" : "Concluída";
     },
@@ -137,11 +131,5 @@ export default {
       }
     },
   },
-
-  // watch: {
-  //   usuario_id() {
-  //     this.consultarSaldo();
-  //   },
-  // },
 };
 </script>

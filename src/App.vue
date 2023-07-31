@@ -7,8 +7,8 @@
     >
       <div class="container">
         <!-- Logotipo -->
-        <router-link class="navbar-brand order-md-first" to="/home"
-          >CRUD de Cadastro de Usuários
+        <router-link class="navbar-brand order-md-first" to="/home">
+          CT System
         </router-link>
 
         <!-- Links do menu -->
@@ -31,7 +31,9 @@
         </ul>
 
         <!-- Botão de logout -->
-        <button class="btn text-light" @click="logout">Logout</button>
+        <button class="btn text-light" @click="logout">
+          <font-awesome-icon :icon="['fas', 'right-from-bracket']" /> Logout
+        </button>
       </div>
     </nav>
     <!-- FIM NAVBAR -->
@@ -54,33 +56,27 @@ export default {
   },
 
   mounted() {
-    // Verifica se o usuário está autenticado quando o componente é montado
+    // Verifica se o usuário está autenticado
     this.isAuthenticated = this.checkAuthentication();
   },
 
   methods: {
-    // Verifica se o usuário está autenticado com base na presença do token no LocalStorage
     checkAuthentication() {
       return localStorage.getItem("token") !== null;
     },
 
-    // Função de logout do usuário
     logout() {
-      // Remove o token e outros dados do usuário do armazenamento no LocalStorage
       localStorage.removeItem("token");
       localStorage.removeItem("usuario");
 
-      // Faz uma requisição POST para a rota de logout no backend
       axios
         .post("http://localhost:3030/logout")
         .then(() => {
-          // Redireciona para a página de login após o logout
           this.$router.push("/login");
         })
         .catch((error) => {
           console.log(error);
-          // Exibe uma mensagem de erro caso ocorra um problema no logout
-          alert("Ocorreu um erro durante o Logout.");
+          Alert.showToast("error", "Erro ao fazer logout");
         });
     },
   },

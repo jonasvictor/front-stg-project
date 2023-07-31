@@ -46,6 +46,13 @@ export default {
       },
     };
   },
+
+  mounted() {
+    if (this.$route.name === "login" && localStorage.getItem("token")) {
+      this.$router.push("/usuarios");
+    }
+  },
+
   methods: {
     submit() {
       const payload = {
@@ -58,29 +65,18 @@ export default {
         .then((res) => {
           console.log(res.data);
           if (res.data.token) {
-            // Login bem-sucedido
             // Armazene o token e os dados do usuário no LocalStorage
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("usuario", JSON.stringify(res.data.user));
-            // Redirecione para a página home
             this.$router.push("/usuarios");
-            // Exibe um alerta de sucesso
             Alert.showToast("success", "Autenticação bem-sucedida");
           }
         })
         .catch((error) => {
           console.log(error);
-          // Login mal-sucedido
           Alert.showToast("error", "Acesso não autorizado");
         });
     },
-  },
-  mounted() {
-    if (this.$route.name === "login" && localStorage.getItem("token")) {
-      // Se houver um token, significa que o usuário já está autenticado
-      // Redireciona diretamente para a tela de home
-      this.$router.push("/usuarios");
-    }
   },
 };
 </script>

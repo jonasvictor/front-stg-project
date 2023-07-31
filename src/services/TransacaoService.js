@@ -1,7 +1,3 @@
-/**
- * Arquivo responsável pelos métodos de requisição à API via HTTP.
- */
-
 import Api from "./Api";
 
 export default {

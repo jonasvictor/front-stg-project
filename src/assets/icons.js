@@ -1,4 +1,3 @@
-// assets/icons.js
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
@@ -8,6 +7,7 @@ import {
   faMoneyBill,
   faMoneyBillWave,
   faReceipt,
+  faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -16,7 +16,8 @@ library.add(
   faTrash,
   faMoneyBill,
   faMoneyBillWave,
-  faReceipt
+  faReceipt,
+  faRightFromBracket
 );
 
 export default FontAwesomeIcon;
