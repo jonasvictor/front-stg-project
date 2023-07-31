@@ -22,10 +22,7 @@ export default {
   // Método responsável por fazer um saque
   async createSaque(valor, usuario_id) {
     try {
-      const response = await Api().post(`/transacoes/saque`, {
-        valor,
-        usuario_id,
-      });
+      const response = await Api().post(`/transacoes/saque`, valor, usuario_id);
       return response.data;
     } catch (error) {
       return console.log(error);
