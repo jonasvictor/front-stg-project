@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-4">
+  <div class="container">
     <div class="card mx-auto" style="width: 800px">
       <div class="card-header text-center">
         <h5>Realizar Depósito</h5>
