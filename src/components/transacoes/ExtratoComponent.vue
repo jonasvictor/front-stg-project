@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import UsuarioService from "../../services/UsuarioService";
 import TransacaoService from "../../services/TransacaoService";
 import Alert from "../../utils/Alert";
 export default {
@@ -100,6 +101,14 @@ export default {
     },
 
     async gerarExtrato() {
+      const usuarioExiste = await UsuarioService.getUsuarioId(this.usuario_id);
+      if (!usuarioExiste) {
+        Alert.showToast(
+          "error",
+          "Erro ao gerar extrato, Usuário não foi encontrado."
+        );
+        return;
+      }
       if (this.usuario_id) {
         if (this.filtro === "geral") {
           this.extrato = await TransacaoService.getExtratoTransacoesUsuario(
@@ -116,6 +125,7 @@ export default {
         }
         // Consultar o saldo
         this.consultarSaldo();
+        return;
       } else {
         this.extrato = [];
         Alert.showToast("warning", "Atenção", "Informe o ID do usuário!");
