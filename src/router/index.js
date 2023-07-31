@@ -61,18 +61,6 @@ const routes = [
     component: () => import("@/components/transacoes/ExtratoComponent"),
     meta: { requiresAuth: true },
   },
-  // {
-  //   path: "/extrato/deposito",
-  //   name: "extrato-deposito",
-  //   component: () => import("@/components/transacoes/ExtratoComponent"),
-  //   meta: { requiresAuth: true },
-  // },
-  // {
-  //   path: "/extrato/saque",
-  //   name: "extrato-saque",
-  //   component: () => import("@/components/transacoes/ExtratoComponent"),
-  //   meta: { requiresAuth: true },
-  // },
 ];
 
 const router = createRouter({
@@ -89,13 +77,11 @@ router.beforeEach((to, from, next) => {
     // Redireciona para a página de login se não estiver autenticado
     next({ name: "login" });
   } else {
-    // Continua a transição para a próxima rota
     next();
   }
 });
 
 router.afterEach((to, from) => {
-  // Completa o progresso do nProgress
   nProgress.done();
 });
 
