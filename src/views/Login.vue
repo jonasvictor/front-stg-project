@@ -33,20 +33,9 @@
 </template>
 
 <script>
-import Swal from "sweetalert2";
+import Alert from "../utils/Alert";
 import axios from "axios";
 
-/**
- * Componente Login
- *
- * Este componente representa a tela de login do aplicativo.
- * Ele contém um formulário para inserir o email e senha do usuário.
- * Ao fazer o login, ele envia uma requisição POST para a rota de login do backend,
- * verifica se o login foi bem-sucedido e redireciona para a página home em caso positivo.
- * Caso o login falhe, exibe um alerta de erro.
- * Também verifica se o usuário já está autenticado quando a tela de login é montada
- * e redireciona diretamente para a página home se já estiver autenticado.
- */
 export default {
   name: "Login",
   data() {
@@ -58,16 +47,6 @@ export default {
     };
   },
   methods: {
-    /**
-     * Função submit
-     *
-     * Executada quando o formulário de login é submetido.
-     * Faz uma requisição POST para a rota de login do backend com as credenciais do usuário.
-     * Verifica se o login foi bem-sucedido com base na resposta do servidor.
-     * Se o login for bem-sucedido, armazena o token e os dados do usuário no localStorage,
-     * redireciona para a página home e exibe um alerta de sucesso.
-     * Caso contrário, exibe um alerta de erro.
-     */
     submit() {
       const payload = {
         email: this.input.email,
@@ -84,38 +63,23 @@ export default {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("usuario", JSON.stringify(res.data.user));
             // Redirecione para a página home
-            this.$router.push("/home");
-
+            this.$router.push("/usuarios");
             // Exibe um alerta de sucesso
-            Swal.fire({
-              icon: "success",
-              title: "Autenticação bem-sucedida",
-            });
+            Alert.showToast("success", "Autenticação bem-sucedida");
           }
         })
         .catch((error) => {
           console.log(error);
           // Login mal-sucedido
-          Swal.fire({
-            icon: "error",
-            title: "Acesso não autorizado",
-          });
+          Alert.showToast("error", "Acesso não autorizado");
         });
     },
   },
   mounted() {
-    /**
-     * Hook mounted
-     *
-     * Executado quando a tela de login é montada.
-     * Verifica se já há um token no localStorage.
-     * Se houver um token e a tela atual for a de login, significa que o usuário já está autenticado.
-     * Redireciona diretamente para a página home.
-     */
     if (this.$route.name === "login" && localStorage.getItem("token")) {
       // Se houver um token, significa que o usuário já está autenticado
       // Redireciona diretamente para a tela de home
-      this.$router.push("/home");
+      this.$router.push("/usuarios");
     }
   },
 };
