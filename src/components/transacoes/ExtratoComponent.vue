@@ -31,7 +31,7 @@
     </div>
 
     <!-- Exibir o saldo -->
-    <div v-if="saldo >= 0" class="card mt-4">
+    <div v-if="saldo >= 0 && extrato.length > 0" class="card mt-4">
       <div class="card-header">
         <h5>Saldo</h5>
       </div>
@@ -42,11 +42,11 @@
 
     <!-- Tabela para exibir o extrato -->
     <div v-if="extrato.length > 0" class="card mt-4">
-      <div class="card-header">
+      <div class="card-header text-center">
         <h5>Extrato</h5>
       </div>
       <div class="card-body">
-        <table class="table">
+        <table class="table table-striped text-center">
           <thead>
             <tr>
               <th>Data</th>
@@ -59,7 +59,7 @@
           </thead>
           <tbody>
             <tr v-for="(transacao, index) in extrato" :key="index">
-              <td>{{ transacao.data }}</td>
+              <td>{{ formatarData(transacao.data) }}</td>
               <td>{{ transacao.id }}</td>
               <td>{{ transacao.usuario.name }}</td>
               <td>{{ getTipoTransacao(transacao.tipo_id) }}</td>
@@ -75,6 +75,7 @@
 
 <script>
 import TransacaoService from "../../services/TransacaoService";
+import Alert from "../../utils/Alert";
 export default {
   data() {
     return {
@@ -90,6 +91,11 @@ export default {
   // },
 
   methods: {
+    // Formatar data
+    formatarData(data) {
+      return new Date(data).toLocaleString();
+    },
+
     // Função para obter o tipo de transação com base no tipo_id
     getTipoTransacao(tipo_id) {
       return tipo_id === 3 ? "Depósito" : "Saque";
@@ -114,9 +120,11 @@ export default {
             this.usuario_id
           );
         }
+        // Consultar o saldo
+        this.consultarSaldo();
       } else {
         this.extrato = [];
-        alert("Informe o ID do usuário!");
+        Alert.showToast("warning", "Atenção", "Informe o ID do usuário!");
       }
     },
 
@@ -130,10 +138,10 @@ export default {
     },
   },
 
-  watch: {
-    usuario_id() {
-      this.consultarSaldo();
-    },
-  },
+  // watch: {
+  //   usuario_id() {
+  //     this.consultarSaldo();
+  //   },
+  // },
 };
 </script>

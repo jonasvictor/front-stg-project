@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-4">
-    <div class="card">
-      <div class="card-header">
+    <div class="card mx-auto" style="width: 800px">
+      <div class="card-header text-center">
         <h5>Realizar Depósito</h5>
       </div>
       <div class="card-body">
@@ -23,13 +23,20 @@
               type="number"
               class="form-control"
               id="valor"
+              step="0.01"
               required
             />
           </div>
-          <button type="submit" class="btn btn-primary">Enviar</button>
-          <router-link to="/transacoes" class="btn btn-secondary"
-            >Cancelar</router-link
-          >
+          <div class="col-md-6 mx-auto">
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary btn-md">
+                Enviar
+              </button>
+              <router-link to="/transacoes" class="btn btn-secondary btn-md"
+                >Cancelar</router-link
+              >
+            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -38,6 +45,8 @@
 
 <script>
 import TransacaoService from "../../services/TransacaoService";
+import UsuarioService from "../../services/UsuarioService";
+import Alert from "../../utils/Alert";
 
 export default {
   data() {
@@ -48,18 +57,44 @@ export default {
   },
   methods: {
     async submitDeposito() {
-      // TODO: Implementar a lógica para realizar o depósito
-      await TransacaoService.createDeposito({
-        usuario_id: this.usuario_id,
-        valor: this.valorDeposito,
-      });
-      console.log("Depósito realizado com sucesso!");
-      alert(
-        `Depósito de R$ ${this.valorDeposito.toFixed(2)} para o usuário de ID ${
-          this.usuario_id
-        } realizado com sucesso!`
-      );
-      this.$router.push("/transacoes");
+      // let existe = Boolean;
+      const usuarioExiste = await UsuarioService.getUsuarioId(this.usuario_id);
+      if (!usuarioExiste) {
+        Alert.showToast(
+          "error",
+          "Erro ao realizar o depósito, Usuário não foi encontrado."
+        );
+      } else {
+        await TransacaoService.createDeposito({
+          valor: this.valorDeposito,
+          usuario_id: this.usuario_id,
+        });
+        Alert.showToast("success", "Depósito realizado com sucesso!");
+        this.$router.push("/transacoes");
+      }
+
+      if (this.valorDeposito <= 0) {
+        Alert.showToast(
+          "error",
+          "O valor do depósito deve ser maior que zero."
+        );
+        return;
+      }
+      // if (!usuarioExiste) {
+      //   Alert.showToast(
+      //     "error",
+      //     "O ID fornecido não corresponde a nenhum usuário registrado."
+      //   );
+      //   return;
+      // }
+
+      // if (this.valorDeposito <= 0) {
+      //   Alert.showToast(
+      //     "error",
+      //     "O valor do depósito deve ser maior que zero."
+      //   );
+      //   return;
+      // }
     },
   },
 };
