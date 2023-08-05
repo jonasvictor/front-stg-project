@@ -93,7 +93,7 @@ export default {
     },
 
     getTipoTransacao(tipo_id) {
-      return tipo_id === 3 ? "Depósito" : "Saque";
+      return tipo_id === 1 ? "Saque" : "Depósito";
     },
 
     getStatusTransacao(status_id) {
