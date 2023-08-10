@@ -70,7 +70,7 @@ export default {
       localStorage.removeItem("usuario");
 
       axios
-        .post("http://localhost:3030/logout")
+        .post("http://localhost:3000/logout")
         .then(() => {
           this.$router.push("/login");
         })
