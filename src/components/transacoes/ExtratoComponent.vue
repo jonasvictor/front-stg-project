@@ -36,7 +36,7 @@
         <h5>Saldo</h5>
       </div>
       <div class="card-body">
-        <p class="fw-bold">{{ `Saldo atual: R$ ${saldo.toFixed(2)}` }}</p>
+        <p class="fw-bold">{{ `Saldo atual: ${formatarValor(saldo)}` }}</p>
       </div>
     </div>
 
@@ -64,7 +64,7 @@
               <td>{{ transacao.usuario.name }}</td>
               <td>{{ getTipoTransacao(transacao.tipo_id) }}</td>
               <td>{{ getStatusTransacao(transacao.status_id) }}</td>
-              <td>{{ transacao.valor }}</td>
+              <td>{{ formatarValor(transacao.valor) }}</td>
             </tr>
           </tbody>
         </table>
@@ -90,6 +90,13 @@ export default {
   methods: {
     formatarData(data) {
       return new Date(data).toLocaleString();
+    },
+
+    formatarValor(valor) {
+      return new Number(valor).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
     },
 
     getTipoTransacao(tipo_id) {

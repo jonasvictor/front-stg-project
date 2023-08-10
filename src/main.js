@@ -7,7 +7,6 @@ import VueSweetalert2 from "vue-sweetalert2";
 import axios from "axios";
 import "../node_modules/nprogress/nprogress.css";
 import FontAwesomeIcon from "@/assets/icons";
-import money from "v-money3";
 
 // Verifica se o usuário está autenticado e redireciona para a tela de login se necessário
 router.isReady().then(() => {
@@ -22,5 +21,5 @@ router.isReady().then(() => {
 createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)
   .use(store)
-  .use(router, VueSweetalert2, axios, money, { precision: 4 })
+  .use(router, VueSweetalert2, axios)
   .mount("#app");
