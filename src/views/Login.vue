@@ -61,7 +61,7 @@ export default {
       };
 
       axios
-        .post("http://localhost:3030/login", payload)
+        .post("http://localhost:3000/login", payload)
         .then((res) => {
           console.log(res.data);
           if (res.data.token) {
